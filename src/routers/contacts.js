@@ -4,6 +4,7 @@ import {
   deleteContactByIdController,
   getContactByIdController,
   getContactsControler,
+  patchContactByIdController,
   putContactByIdController,
 } from '../controllers/contacts.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper';
@@ -23,7 +24,10 @@ contactsRouter.put(
   '/contacts/:contactId',
   ctrlWrapper(putContactByIdController),
 );
-
+contactsRouter.patch(
+  '/contacts/:contactId',
+  ctrlWrapper(patchContactByIdController),
+);
 contactsRouter.delete(
   '/contacts/:contactId',
   ctrlWrapper(deleteContactByIdController),

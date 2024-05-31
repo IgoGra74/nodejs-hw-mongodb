@@ -68,6 +68,22 @@ export const putContactByIdController = async (req, res, next) => {
   });
 };
 
+export const patchContactByIdController = async (req, res, next) => {
+  const contactId = req.params.contactId;
+  const newContactBody = req.body;
+  const contact = await upsertContactById(contactId, newContactBody);
+
+  if (!contact) {
+    next(createHttpError(404, 'Contact not found'));
+    return;
+  }
+  res.status(200).json({
+    status: 200,
+    message: `Successfully parsed contact!`,
+    data: contact,
+  });
+};
+
 export const deleteContactByIdController = async (req, res, next) => {
   const contactId = req.params.contactId;
   const contact = await deleteContactsById(contactId);
