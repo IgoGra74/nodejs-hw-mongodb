@@ -7,7 +7,7 @@ import {
   patchContactByIdController,
   putContactByIdController,
 } from '../controllers/contacts.js';
-import { ctrlWrapper } from '../utils/ctrlWrapper';
+import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 
 export const contactsRouter = Router();
 
