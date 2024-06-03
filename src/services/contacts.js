@@ -17,7 +17,10 @@ export const createContact = async (newContact) => {
 };
 
 export const deleteContactsById = async (contactId) => {
-  await ContactsCollection.findByIdAndDelete(contactId);
+  const contact = await ContactsCollection.findByIdAndDelete({
+    _id: contactId,
+  });
+  return contact;
 };
 
 export const upsertContactById = async (
