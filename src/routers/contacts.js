@@ -31,7 +31,7 @@ contactsRouter.post(
 
 contactsRouter.put(
   '/contacts/:contactId',
-  validateBody(updateContactSchema),
+  validateBody(createContactSchema),
   ctrlWrapper(putContactByIdController),
 );
 contactsRouter.patch(
