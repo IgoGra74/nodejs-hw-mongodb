@@ -1,15 +1,18 @@
 import mongoose from 'mongoose';
 import {
   createContact,
-  deleteContactsById,
+  deleteContactById,
   getAllContacts,
   getContactsById,
   upsertContactById,
 } from '../services/contacts.js';
 import createHttpError from 'http-errors';
+import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 
 export const getContactsControler = async (req, res) => {
-  const contacts = await getAllContacts();
+  const { pag, perPage } = parsePaginationParams(req.query);
+
+  const contacts = await getAllContacts({ pag, perPage });
 
   res.status(200).json({
     status: 200,
@@ -117,7 +120,7 @@ export const deleteContactByIdController = async (req, res, next) => {
     });
   }
 
-  const contact = await deleteContactsById(contactId);
+  const contact = await deleteContactById(contactId);
 
   if (!contact) {
     return next(createHttpError(404, 'Contact not found'));
