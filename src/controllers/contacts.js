@@ -33,14 +33,6 @@ export const getContactsController = async (req, res) => {
 
 export const getContactByIdController = async (req, res, next) => {
   const contactId = req.params.contactId;
-
-  if (!mongoose.isValidObjectId(contactId)) {
-    return res.status(400).json({
-      status: 400,
-      message: `Invalid contact ID format: ${contactId}`,
-    });
-  }
-
   const contact = await getContactsById(contactId);
 
   if (!contact) {
@@ -56,7 +48,6 @@ export const getContactByIdController = async (req, res, next) => {
 
 export const createContactController = async (req, res) => {
   const newContact = req.body;
-
   const createdContact = await createContact(newContact);
 
   res.status(201).json({
@@ -68,14 +59,6 @@ export const createContactController = async (req, res) => {
 
 export const putContactByIdController = async (req, res, next) => {
   const contactId = req.params.contactId;
-
-  if (!mongoose.isValidObjectId(contactId)) {
-    return res.status(400).json({
-      status: 400,
-      message: `Invalid contact ID format: ${contactId}`,
-    });
-  }
-
   const newContactBody = req.body;
 
   const result = await upsertContactById(contactId, newContactBody, {
@@ -97,14 +80,6 @@ export const putContactByIdController = async (req, res, next) => {
 
 export const patchContactByIdController = async (req, res, next) => {
   const contactId = req.params.contactId;
-
-  if (!mongoose.isValidObjectId(contactId)) {
-    return res.status(400).json({
-      status: 400,
-      message: `Invalid contact ID format:  ${contactId}`,
-    });
-  }
-
   const newContactBody = req.body;
 
   const contact = await upsertContactById(contactId, newContactBody);
@@ -122,13 +97,6 @@ export const patchContactByIdController = async (req, res, next) => {
 
 export const deleteContactByIdController = async (req, res, next) => {
   const contactId = req.params.contactId;
-
-  if (!mongoose.isValidObjectId(contactId)) {
-    return res.status(400).json({
-      status: 400,
-      message: `Invalid contact ID format:  ${contactId}`,
-    });
-  }
 
   const contact = await deleteContactById(contactId);
 
