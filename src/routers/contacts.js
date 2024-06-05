@@ -3,7 +3,7 @@ import {
   createContactController,
   deleteContactByIdController,
   getContactByIdController,
-  getContactsControler,
+  getContactsController,
   patchContactByIdController,
   putContactByIdController,
 } from '../controllers/contacts.js';
@@ -16,7 +16,7 @@ import {
 
 export const contactsRouter = Router();
 
-contactsRouter.get('/contacts', ctrlWrapper(getContactsControler));
+contactsRouter.get('/contacts', ctrlWrapper(getContactsController));
 
 contactsRouter.get(
   '/contacts/:contactId',
