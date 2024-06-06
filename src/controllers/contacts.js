@@ -1,4 +1,3 @@
-import mongoose from 'mongoose';
 import {
   createContact,
   deleteContactById,
@@ -12,12 +11,12 @@ import { parseSortParams } from '../utils/parseSortParams.js';
 import { parseFilterParams } from '../utils/parseFilterParams.js';
 
 export const getContactsController = async (req, res) => {
-  const { pag, perPage } = parsePaginationParams(req.query);
+  const { page, perPage } = parsePaginationParams(req.query);
   const { sortBy, sortOrder } = parseSortParams(req.query);
   const filter = parseFilterParams(req.query);
 
   const contacts = await getAllContacts({
-    pag,
+    page,
     perPage,
     sortBy,
     sortOrder,
