@@ -7,17 +7,17 @@ import {
 
 import { ONE_DAY } from '../constants/index.js';
 
-export const registerUserController = async (req, res) => {
+export const registerUserController = async (req, res, next) => {
   const user = await registerUser(req.body);
 
   res.status(200).json({
     status: 200,
     message: 'Successfully registered a user!',
-    data: user,
+    data: { user },
   });
 };
 
-export const loginUserController = async (req, res) => {
+export const loginUserController = async (req, res, next) => {
   const session = await loginUser(req.body);
 
   res.cookie('refreshToken', session.refreshToken, {
@@ -39,15 +39,19 @@ export const loginUserController = async (req, res) => {
   });
 };
 
-export const logoutUserController = async (req, res) => {
-  if (req.cookies.sessionId) {
-    await logoutUser(req.cookies.sessionId);
-  }
+export const logoutUserController = async (req, res, next) => {
+  // console.log(req.cookies);
+  // console.log('Cookies:', req.cookies);
+
+  await logoutUser({
+    sessionId: req.cookies.sessionId,
+    sessionToken: req.cookies.sessionToken,
+  });
 
   res.clearCookie('sessionId');
   res.clearCookie('refreshToken');
 
-  res.status(204).send();
+  res.status(204);
 };
 
 const setupSession = (res, session) => {
