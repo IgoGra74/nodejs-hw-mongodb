@@ -42,16 +42,14 @@ export const loginUserController = async (req, res, next) => {
 export const logoutUserController = async (req, res, next) => {
   // console.log(req.cookies);
   // console.log('Cookies:', req.cookies);
-
-  await logoutUser({
-    sessionId: req.cookies.sessionId,
-    sessionToken: req.cookies.sessionToken,
-  });
+  if (req.cookies.sessionId) {
+    await logoutUser(req.cookies.sessionId);
+  }
 
   res.clearCookie('sessionId');
   res.clearCookie('refreshToken');
 
-  res.status(204);
+  res.status(204).send();
 };
 
 const setupSession = (res, session) => {
@@ -73,7 +71,7 @@ export const refreshUserSessionController = async (req, res) => {
 
   setupSession(res, session);
 
-  res.status(200).json({
+  res.json({
     status: 200,
     message: 'Successfully refreshed session!',
     data: {

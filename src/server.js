@@ -19,6 +19,7 @@ export const setupServer = () => {
       limit: '5mb',
     }),
   );
+  app.use(cookieParser());
 
   app.use(cors());
 
@@ -35,8 +36,6 @@ export const setupServer = () => {
   app.use('*', notFoundHandler);
 
   app.use(errorHandler);
-
-  app.use(cookieParser());
 
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
