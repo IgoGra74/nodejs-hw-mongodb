@@ -7,7 +7,7 @@ import {
 
 import { ONE_DAY } from '../constants/index.js';
 
-export const registerUserController = async (req, res, next) => {
+export const registerUserController = async (req, res) => {
   const user = await registerUser(req.body);
 
   res.status(200).json({
@@ -17,7 +17,7 @@ export const registerUserController = async (req, res, next) => {
   });
 };
 
-export const loginUserController = async (req, res, next) => {
+export const loginUserController = async (req, res) => {
   const session = await loginUser(req.body);
 
   res.cookie('refreshToken', session.refreshToken, {
@@ -39,7 +39,7 @@ export const loginUserController = async (req, res, next) => {
   });
 };
 
-export const logoutUserController = async (req, res, next) => {
+export const logoutUserController = async (req, res) => {
   // console.log(req.cookies);
   // console.log('Cookies:', req.cookies);
   if (req.cookies.sessionId) {
@@ -63,6 +63,7 @@ const setupSession = (res, session) => {
     expires: new Date(Date.now() + ONE_DAY),
   });
 };
+
 export const refreshUserSessionController = async (req, res) => {
   const session = await refreshUsersSession({
     sessionId: req.cookies.sessionId,
