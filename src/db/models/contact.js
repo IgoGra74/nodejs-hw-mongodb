@@ -1,6 +1,43 @@
+// import { Schema, model } from 'mongoose';
+
+// const contactSchema = new Schema(
+//   {
+//     name: {
+//       type: String,
+//       required: true,
+//     },
+//     phoneNumber: {
+//       type: String,
+//       required: true,
+//     },
+//     email: {
+//       type: String,
+//       required: false,
+//     },
+//     isFavourite: {
+//       type: Boolean,
+//       default: false,
+//     },
+//     contactType: {
+//       type: String,
+//       enum: ['work', 'home', 'personal'],
+//       default: 'personal',
+//     },
+//     parentId: {
+//       type: Schema.Types.ObjectId,
+//       ref: 'users',
+//     },
+//   },
+//   {
+//     timestamps: true,
+//     versionKey: false,
+//   },
+// );
+// export const ContactsCollection = model('contacts', contactSchema);
+
 import { Schema, model } from 'mongoose';
 
-const contactSchema = new Schema(
+const contactsSchema = new Schema(
   {
     name: {
       type: String,
@@ -23,9 +60,10 @@ const contactSchema = new Schema(
       enum: ['work', 'home', 'personal'],
       default: 'personal',
     },
-    parentId: {
+    userId: {
       type: Schema.Types.ObjectId,
       ref: 'users',
+      required: true,
     },
   },
   {
@@ -33,4 +71,5 @@ const contactSchema = new Schema(
     versionKey: false,
   },
 );
-export const ContactsCollection = model('contacts', contactSchema);
+
+export const ContactsCollection = model('contacts', contactsSchema);
