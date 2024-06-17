@@ -71,6 +71,7 @@ export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
     _id: sessionId,
     refreshToken,
   });
+  // console.log({ session });
 
   if (!session) {
     throw createHttpError(401, 'Session not found');
@@ -83,13 +84,14 @@ export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
     throw createHttpError(401, 'Session token expired');
   }
 
-  const user = await UsersCollection.findById(session.userId);
-  if (!user) {
-    throw createHttpError(401, 'Session not found!');
-  }
+  // const user = await UsersCollection.findById(session.userId);
+  // if (!user) {
+  //   throw createHttpError(401, 'Session not found!');
+  // }
 
   await SessionsCollection.deleteOne({
     _id: sessionId,
+    refreshToken,
   });
 
   const newSession = createSession();
