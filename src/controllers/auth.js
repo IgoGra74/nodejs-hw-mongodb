@@ -17,9 +17,7 @@ export const registerUserController = async (req, res) => {
   });
 };
 
-export const loginUserController = async (req, res) => {
-  const session = await loginUser(req.body);
-
+const setupSession = (res, session) => {
   res.cookie('sessionId', session._id, {
     httpOnly: true,
     expires: new Date(Date.now() + TWO_DAY),
@@ -29,6 +27,12 @@ export const loginUserController = async (req, res) => {
     httpOnly: true,
     expires: new Date(Date.now() + TWO_DAY),
   });
+};
+
+export const loginUserController = async (req, res) => {
+  const session = await loginUser(req.body);
+
+  setupSession(res, session);
 
   res.json({
     status: 200,
@@ -40,26 +44,15 @@ export const loginUserController = async (req, res) => {
 };
 
 export const logoutUserController = async (req, res) => {
-  if (req.cookies.sessionId) {
-    await logoutUser(req.cookies.sessionId);
-  }
+  // if (req.cookies.sessionId) {
+  //   await logoutUser(req.cookies.sessionId);
+  // }
+  await logoutUser(req.cookies.sessionId);
 
   res.clearCookie('sessionId');
   res.clearCookie('refreshToken');
 
   res.status(204).send();
-};
-
-const setupSession = (res, session) => {
-  res.cookie('sessionId', session._id, {
-    httpOnly: true,
-    expires: new Date(Date.now() + TWO_DAY),
-  });
-
-  res.cookie('refreshToken', session.refreshToken, {
-    httpOnly: true,
-    expires: new Date(Date.now() + TWO_DAY),
-  });
 };
 
 export const refreshUserSessionController = async (req, res) => {
