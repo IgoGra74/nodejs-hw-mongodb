@@ -17,34 +17,34 @@ import {
 import { validateMongoId } from '../middlewares/validateMongoId.js';
 import { authenticate } from '../middlewares/authenticate.js';
 
-const router = Router();
+const contactsRouter = Router();
 
-router.use(authenticate);
+contactsRouter.use('/:contactId', validateMongoId('contactId'));
 
-router.use('/:contactId', validateMongoId('contactId'));
+contactsRouter.use(authenticate);
 
-router.get('/', ctrlWrapper(getContactsController));
+contactsRouter.get('', ctrlWrapper(getContactsController));
 
-router.get('/:contactId', ctrlWrapper(getContactByIdController));
+contactsRouter.get('/:contactId', ctrlWrapper(getContactByIdController));
 
-router.post(
-  '/',
+contactsRouter.post(
+  '',
   validateBody(createContactSchema),
   ctrlWrapper(createContactController),
 );
 
-router.put(
+contactsRouter.put(
   '/:contactId',
   validateBody(createContactSchema),
   ctrlWrapper(putContactByIdController),
 );
 
-router.patch(
+contactsRouter.patch(
   '/:contactId',
   validateBody(updateContactSchema),
   ctrlWrapper(patchContactByIdController),
 );
 
-router.delete('/:contactId', ctrlWrapper(deleteContactByIdController));
+contactsRouter.delete('/:contactId', ctrlWrapper(deleteContactByIdController));
 
-export default router;
+export default contactsRouter;
