@@ -16,14 +16,14 @@ export const getContactsController = async (req, res) => {
   const { page, perPage } = parsePaginationParams(req.query);
   const { sortBy, sortOrder } = parseSortParams(req.query);
   const filter = parseFilterParams(req.query);
-  // const user = req.user;
+
   const contacts = await getAllContacts({
     page,
     perPage,
     sortBy,
     sortOrder,
     filter,
-    userId: req.user.id,
+    userId: req.user._id,
   });
 
   res.status(200).json({
@@ -34,9 +34,7 @@ export const getContactsController = async (req, res) => {
 };
 
 export const getContactByIdController = async (req, res, next) => {
-  // const contactId = req.params.contactId;
   const { contactId } = req.params;
-  // const userId = req.user._id;
 
   const contact = await getContactsById(contactId, req.user._id);
 
@@ -52,10 +50,9 @@ export const getContactByIdController = async (req, res, next) => {
 };
 
 export const createContactController = async (req, res) => {
-  // const userId = req.user._id;
-  // const body = req.body;
+  const { body } = req;
 
-  const newContact = await createContact({ ...req.body, userId: req.user._id });
+  const newContact = await createContact(body, req.user._id);
 
   res.status(201).json({
     status: 201,
@@ -87,8 +84,6 @@ export const putContactByIdController = async (req, res, next) => {
 };
 
 export const patchContactByIdController = async (req, res, next) => {
-  // const userId = req.user._id;
-  // const contactId = req.params.contactId;
   const { contactId } = req.params;
   const newContactBody = req.body;
 
@@ -110,9 +105,7 @@ export const patchContactByIdController = async (req, res, next) => {
 };
 
 export const deleteContactByIdController = async (req, res, next) => {
-  // const contactId = req.params.contactId;
   const { contactId } = req.params;
-  // const userId = req.user._id;
 
   const contact = await deleteContactById(contactId, req.user._id);
 

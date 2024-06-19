@@ -21,7 +21,7 @@ const contactsRouter = Router();
 
 contactsRouter.use('/:contactId', validateMongoId('contactId'));
 
-contactsRouter.use(authenticate);
+contactsRouter.use('/', authenticate);
 
 contactsRouter.get('/', ctrlWrapper(getContactsController));
 

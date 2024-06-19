@@ -30,8 +30,6 @@ export const loginUserController = async (req, res) => {
     expire: new Date(Date.now() + TWO_DAY),
   });
 
-  // setupSession(res, session);
-
   res.json({
     status: 200,
     message: 'Successfully logged in!',
@@ -42,9 +40,6 @@ export const loginUserController = async (req, res) => {
 };
 
 export const logoutUserController = async (req, res) => {
-  // if (req.cookies.sessionId) {
-  //   await logoutUser(req.cookies.sessionId);
-  // }
   await logoutUser({
     sessionId: req.cookies.sessionId,
     refreshToken: req.cookies.refreshToken,
@@ -78,7 +73,6 @@ export const refreshUserSessionController = async (req, res) => {
 
   setupSession(res, session);
 
-  // console.log(session);
   res.json({
     status: 200,
     message: 'Successfully refreshed session!',
