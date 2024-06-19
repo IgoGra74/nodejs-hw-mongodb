@@ -8,7 +8,7 @@ export const createContactSchema = Joi.object({
   contactType: Joi.string()
     .valid('work', 'personal', 'home')
     .default('personal'),
-  parentId: Joi.string().required(),
+  userId: Joi.string(),
 });
 
 export const updateContactSchema = Joi.object({

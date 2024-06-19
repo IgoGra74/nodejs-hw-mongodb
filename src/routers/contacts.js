@@ -23,12 +23,12 @@ contactsRouter.use('/:contactId', validateMongoId('contactId'));
 
 contactsRouter.use(authenticate);
 
-contactsRouter.get('', ctrlWrapper(getContactsController));
+contactsRouter.get('/', ctrlWrapper(getContactsController));
 
 contactsRouter.get('/:contactId', ctrlWrapper(getContactByIdController));
 
 contactsRouter.post(
-  '',
+  '/',
   validateBody(createContactSchema),
   ctrlWrapper(createContactController),
 );

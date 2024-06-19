@@ -48,25 +48,29 @@ export const loginUser = async (payload) => {
 
   await SessionsCollection.deleteOne({ userId: user._id });
 
-  // const accessToken = randomBytes(30).toString('base64');
-  // const refreshToken = randomBytes(30).toString('base64');
+  const accessToken = randomBytes(30).toString('base64');
+  const refreshToken = randomBytes(30).toString('base64');
 
   return await SessionsCollection.create({
     userId: user._id,
-    ...createSession(),
+    accessToken,
+    refreshToken,
+    accessTokenValidUntil: new Date(Date.now() + FIFTEEN_MINUTES),
+    refreshTokenValidUntil: new Date(Date.now() + TWO_DAY),
   });
 };
 
-export const logoutUser = async (sessionId) => {
-  await SessionsCollection.deleteOne({
+export const logoutUser = async ({ sessionId, refreshToken }) => {
+  return await SessionsCollection.deleteOne({
     _id: sessionId,
+    refreshToken: refreshToken,
   });
 };
 
 export const refreshUsersSession = async ({ sessionId, refreshToken }) => {
   const session = await SessionsCollection.findOne({
     _id: sessionId,
-    refreshToken,
+    refreshToken: refreshToken,
   });
 
   if (!session) {
