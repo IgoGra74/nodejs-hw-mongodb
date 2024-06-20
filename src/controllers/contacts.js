@@ -106,7 +106,6 @@ export const patchContactByIdController = async (req, res, next) => {
 
 export const deleteContactByIdController = async (req, res, next) => {
   const { contactId } = req.params;
-
   const contact = await deleteContactById(contactId, req.user._id);
 
   if (!contact) {
