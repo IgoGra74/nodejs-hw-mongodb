@@ -86,6 +86,7 @@ export const putContactByIdController = async (req, res, next) => {
 export const patchContactByIdController = async (req, res, next) => {
   const { contactId } = req.params;
   const newContactBody = req.body;
+  const photo = req.file;
 
   const result = await upsertContactById(
     contactId,
