@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
-import { SMTP } from '../constants/index.js';
 
+import { SMTP } from '../constants/index.js';
 import { env } from './env.js';
 
 const transporter = nodemailer.createTransport({
