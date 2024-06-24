@@ -5,7 +5,7 @@ import { validateBody } from '../middlewares/validateBody.js';
 import {
   loginUserSchema,
   registerUserSchema,
-  requestResetEmailSchema,
+  sendResetEmailSchema,
   resetPasswordSchema,
 } from '../validation/auth.js';
 import {
@@ -13,7 +13,7 @@ import {
   refreshUserSessionController,
   registerUserController,
   loginUserController,
-  requestResetEmailController,
+  sendResetEmailController,
   resetPasswordController,
 } from '../controllers/auth.js';
 
@@ -42,9 +42,9 @@ authRouter.post(
 );
 
 authRouter.post(
-  '/request-reset-email',
-  validateBody(requestResetEmailSchema),
-  ctrlWrapper(requestResetEmailController),
+  '/send-reset-email',
+  validateBody(sendResetEmailSchema),
+  ctrlWrapper(sendResetEmailController),
 );
 
 authRouter.post(
