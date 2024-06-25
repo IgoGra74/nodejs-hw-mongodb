@@ -30,22 +30,22 @@ contactsRouter.get('/:contactId', ctrlWrapper(getContactByIdController));
 
 contactsRouter.post(
   '/',
-  upload.single('photo'),
   validateBody(createContactSchema),
+  upload.single('photo'),
   ctrlWrapper(createContactController),
 );
 
 contactsRouter.put(
   '/:contactId',
-  upload.single('photo'),
   validateBody(createContactSchema),
+  upload.single('photo'),
   ctrlWrapper(putContactByIdController),
 );
 
 contactsRouter.patch(
   '/:contactId',
-  upload.single('photo'),
   validateBody(updateContactSchema),
+  upload.single('photo'),
   ctrlWrapper(patchContactByIdController),
 );
 

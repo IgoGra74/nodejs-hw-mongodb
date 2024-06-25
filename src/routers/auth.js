@@ -13,8 +13,8 @@ import {
   refreshUserSessionController,
   registerUserController,
   loginUserController,
-  sendResetEmailController,
   resetPasswordController,
+  resetTokenController,
 } from '../controllers/auth.js';
 
 import { authenticate } from '../middlewares/authenticate.js';
@@ -44,11 +44,11 @@ authRouter.post(
 authRouter.post(
   '/send-reset-email',
   validateBody(sendResetEmailSchema),
-  ctrlWrapper(sendResetEmailController),
+  ctrlWrapper(resetTokenController),
 );
 
 authRouter.post(
-  '/reset-password',
+  '/reset-pwd',
   validateBody(resetPasswordSchema),
   ctrlWrapper(resetPasswordController),
 );

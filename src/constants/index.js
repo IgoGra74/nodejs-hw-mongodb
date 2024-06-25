@@ -13,10 +13,10 @@ export const SMTP = {
   SMTP_USER: 'SMTP_USER',
   SMTP_PASSWORD: 'SMTP_PASSWORD',
   SMTP_FROM: 'SMTP_FROM',
+  JWT_SECRET: 'JWT_SECRET',
 };
 
 export const TEMPLATES_DIR = path.join(process.cwd(), 'src', 'templates');
-
 export const TEMP_UPLOAD_DIR = path.join(process.cwd(), 'temp');
 export const UPLOAD_DIR = path.join(process.cwd(), 'uploads');
 
@@ -26,4 +26,4 @@ export const CLOUDINARY = {
   API_SECRET: 'API_SECRET',
 };
 
-export const ENABLE_CLOUDINARY = 'ENABLE_CLOUDINARY';
+// export const ENABLE_CLOUDINARY = 'ENABLE_CLOUDINARY';
