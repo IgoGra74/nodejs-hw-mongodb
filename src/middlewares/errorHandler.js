@@ -6,6 +6,7 @@ export const errorHandler = (err, req, res, next) => {
     return res.status(err.status).json({
       status: err.status,
       message: err.message,
+      details: err.details,
     });
   }
   if (err instanceof MongooseError) {
@@ -23,3 +24,18 @@ export const errorHandler = (err, req, res, next) => {
     error: err.message,
   });
 };
+
+app.use((err, req, res, next) => {
+  if (err.status === 400 && err.details) {
+    // Відправляємо деталі помилки разом з повідомленням
+    return res.status(400).json({
+      message: err.message,
+      details: err.details,
+    });
+  }
+
+  // Обробка інших помилок
+  res.status(err.status || 500).json({
+    message: err.message || 'Internal Server Error',
+  });
+});
