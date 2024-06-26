@@ -25,17 +25,17 @@ export const errorHandler = (err, req, res, next) => {
   });
 };
 
-app.use((err, req, res, next) => {
-  if (err.status === 400 && err.details) {
-    // Відправляємо деталі помилки разом з повідомленням
-    return res.status(400).json({
-      message: err.message,
-      details: err.details,
-    });
-  }
+// app.use((err, req, res, next) => {
+//   if (err.status === 400 && err.details) {
+//     // Відправляємо деталі помилки разом з повідомленням
+//     return res.status(400).json({
+//       message: err.message,
+//       details: err.details,
+//     });
+//   }
 
-  // Обробка інших помилок
-  res.status(err.status || 500).json({
-    message: err.message || 'Internal Server Error',
-  });
-});
+//   // Обробка інших помилок
+//   res.status(err.status || 500).json({
+//     message: err.message || 'Internal Server Error',
+//   });
+// });
