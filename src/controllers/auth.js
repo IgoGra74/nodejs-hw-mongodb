@@ -7,7 +7,6 @@ import {
 } from '../services/auth.js';
 
 import { TWO_DAY } from '../constants/index.js';
-
 import { resetPassword } from '../services/auth.js';
 
 export const registerUserController = async (req, res) => {
