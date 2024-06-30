@@ -43,7 +43,7 @@ requestBody:
           summary: Example with photo
           value:
             phoneNumber: '+3801588308'
-            email: 'danibanani@example.com'
+            email: 'bosini@example.com'
             photo: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAMCAgMCAgMDAwMEAwMEBQIDAQA'
     application/json:
       schema:

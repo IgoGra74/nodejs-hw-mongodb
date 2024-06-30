@@ -12,7 +12,6 @@ tags:
     description: Operations with contacts (adding, editing, deleting, viewing)
   - name: Auth
     description: Operations with users (registration, login, exit, etc.)
-  # теги, що ви будете використовувати
 servers:
   - url: <http://localhost:3000>
   - url: <https://example.com/api/v1>
