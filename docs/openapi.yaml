@@ -13,8 +13,8 @@ tags:
   - name: Auth
     description: Operations with users (registration, login, exit, etc.)
 servers:
-  - url: <http://localhost:3000>
-  - url: <https://nodejs-hw-mongodb-5-tafh.onrender.com>
+  - url: http://localhost:3000
+  - url: https://nodejs-hw-mongodb-5-tafh.onrender.com
 paths:
   /contacts:
     get:
