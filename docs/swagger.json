@@ -5,16 +5,16 @@
     "title": "Contacts API",
     "license": {
       "name": "Apache 2.0",
-      "url": "<http://www.apache.org/licenses/LICENSE-2.0.html>"
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     },
     "description": "This is a documentation of contacts app\n"
   },
   "servers": [
     {
-      "url": "<http://localhost:3000>"
+      "url": "http://localhost:3000"
     },
     {
-      "url": "<https://example.com/api/v1>"
+      "url": "https://nodejs-hw-mongodb-5-tafh.onrender.com"
     }
   ],
   "tags": [
@@ -34,7 +34,7 @@
           "Contacts"
         ],
         "summary": "Get all contacts",
-        "operationId": "getContacts",
+        "operationId": "getAllContacts",
         "description": "Get all contacts",
         "security": [
           {
@@ -162,10 +162,7 @@
                 "type": "object",
                 "required": [
                   "name",
-                  "phoneNumber",
-                  "email",
-                  "isFavorite",
-                  "contactType"
+                  "phoneNumber"
                 ],
                 "properties": {
                   "name": {
@@ -202,11 +199,6 @@
                     "description": "Contact's photo",
                     "type": "string",
                     "format": "binary"
-                  },
-                  "userId": {
-                    "description": "Contacts's user id",
-                    "type": "string",
-                    "example": "65ca67e7ae7f10c88b598384"
                   }
                 }
               }
@@ -214,7 +206,7 @@
           }
         },
         "responses": {
-          "201": {
+          "200": {
             "description": "Creates a contact",
             "content": {
               "application/json": {
@@ -255,7 +247,7 @@
           "Contacts"
         ],
         "summary": "Get contact by id",
-        "operationId": "getContact",
+        "operationId": "getContactsById",
         "description": "Get contact by id",
         "security": [
           {
@@ -265,7 +257,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "id",
+            "name": "contactId",
             "required": true,
             "schema": {
               "type": "string",
@@ -313,7 +305,7 @@
           "Contacts"
         ],
         "summary": "Update contact",
-        "operationId": "updateContact",
+        "operationId": "upsertContactById",
         "description": "Partially update contact's information",
         "security": [
           {
@@ -323,7 +315,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "id",
+            "name": "contactId",
             "required": true,
             "schema": {
               "type": "string",
@@ -376,7 +368,7 @@
                   "summary": "Example with photo",
                   "value": {
                     "phoneNumber": "+3801588308",
-                    "email": "danibanani@example.com",
+                    "email": "bosini@example.com",
                     "photo": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAMCAgMCAgMDAwMEAwMEBQIDAQA"
                   }
                 }
@@ -489,7 +481,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "id",
+            "name": "contactId",
             "required": true,
             "schema": {
               "type": "string",
@@ -1049,7 +1041,7 @@
           "name": {
             "description": "Contact's name",
             "type": "string",
-            "example": "Ihor Graic"
+            "example": "Ihor Grabic"
           },
           "phoneNumber": {
             "description": "Contact's phone number",

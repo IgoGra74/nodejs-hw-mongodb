@@ -1,7 +1,7 @@
 tags:
   - Contacts
 summary: Update contact
-operationId: updateContact
+operationId: upsertContactById
 description: Partially update contact's information
 security:
   - bearerAuth: []
