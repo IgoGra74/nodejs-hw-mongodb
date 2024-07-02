@@ -70,7 +70,7 @@ export const upsertContactById = async (
 
   return {
     student: rawResult.value,
-    isNew: !rawResult?.lastErrorObject?.updatedExisting,
+    isNew: Boolean(rawResult?.lastErrorObject?.upserted),
   };
 };
 
