@@ -1,11 +1,12 @@
 import createHttpError from 'http-errors';
+import mongoose from 'mongoose';
 
 import {
   createContact,
   deleteContactById,
   getAllContacts,
   getContactsById,
-  upsertContactById,
+  patchContactById,
 } from '../services/contacts.js';
 
 import { parsePaginationParams } from '../utils/parsePaginationParams.js';
@@ -38,6 +39,14 @@ export const getContactsController = async (req, res) => {
 
 export const getContactByIdController = async (req, res, next) => {
   const { contactId } = req.params;
+
+  if (!mongoose.isValidObjectId(contactId)) {
+    return res.status(400).json({
+      status: 400,
+      message: 'Id is invalid',
+    });
+  }
+
   const contact = await getContactsById(req.user._id, contactId);
 
   if (!contact) {
@@ -77,31 +86,8 @@ export const createContactController = async (req, res) => {
   });
 };
 
-export const putContactByIdController = async (req, res, next) => {
-  const contactId = req.params.contactId;
-  const userId = req.user._id;
-  const newContactBody = req.body;
-
-  const result = await upsertContactById(contactId, newContactBody, userId, {
-    upsert: true,
-  });
-
-  if (!result) {
-    return next(createHttpError(404, 'Contact not found'));
-  }
-
-  const status = result.isNew ? 201 : 200;
-
-  res.status(status).json({
-    status,
-    message: result.isNew ? 'Contact created!' : 'Contact updated!',
-    data: result.contact,
-  });
-};
-
 export const patchContactByIdController = async (req, res, next) => {
   const { contactId } = req.params;
-  const newContactBody = req.body;
 
   const photo = req.file;
   let photoUrl;
@@ -114,8 +100,8 @@ export const patchContactByIdController = async (req, res, next) => {
     }
   }
 
-  const contact = await upsertContactById(req.user._id, contactId, {
-    ...newContactBody,
+  const contact = await patchContactById(req.user._id, contactId, {
+    ...req.body,
     photo: photoUrl,
   });
 
@@ -125,13 +111,14 @@ export const patchContactByIdController = async (req, res, next) => {
 
   res.json({
     status: 200,
-    message: `Successfully parsed contact!`,
+    message: `Successfully  patched a contact!`,
     data: contact,
   });
 };
 
 export const deleteContactByIdController = async (req, res, next) => {
   const { contactId } = req.params;
+
   const contact = await deleteContactById(req.user._id, contactId);
 
   if (!contact) {
