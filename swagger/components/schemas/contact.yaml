@@ -3,9 +3,9 @@ required:
   - _id
   - name
   - phoneNumber
-  - email
-  - isFavourite
-  - contactType
+  # - email
+  # - isFavourite
+  # - contactType
 properties:
   _id:
     description: "Contact's id"
@@ -35,7 +35,7 @@ properties:
     description: "Link to Contact's photo"
     type: string
     example: <https://res.cloudinary.com/gfoto/image/upload/image.png>
-  userId:
-    description: "Contact's user id"
-    type: string
-    example: 35e4decdd273b30065d54af6
+  # userId:
+  #   description: "Contact's user id"
+  #   type: string
+  #   example: 35e4decdd273b30065d54af6

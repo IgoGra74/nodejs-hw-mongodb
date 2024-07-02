@@ -50,7 +50,7 @@ requestBody:
             example: 65ca67e7ae7f10c88b598384
 
 responses:
-  '201':
+  '200':
     description: Creates a contact
     content:
       application/json:
