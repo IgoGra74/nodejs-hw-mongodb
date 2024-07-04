@@ -1,5 +1,4 @@
-import createHttpError from 'http-errors';
-
+import { SORT_ORDER } from '../constants/index.js';
 import { ContactsCollection } from '../db/models/contact.js';
 import { calculatePaginationData } from '../utils/calculatePaginationData.js';
 
@@ -7,7 +6,7 @@ export const getAllContacts = async ({
   page = 1,
   perPage = 10,
   sortBy = '_id',
-  sortOrder = 'SORT_ORDER.ASC',
+  sortOrder = SORT_ORDER.ASC,
   filter = {},
   userId,
 }) => {

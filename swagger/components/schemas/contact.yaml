@@ -4,7 +4,7 @@ required:
   - name
   - phoneNumber
   - email
-  - isFavourite
+  - isFavorite
   - contactType
 properties:
   _id:
@@ -14,11 +14,11 @@ properties:
   name:
     description: "Contact's name"
     type: string
-    example: 'Ihor Grabic'
+    example: 'Igor Grabic'
   phoneNumber:
     description: "Contact's phone number"
     type: number
-    example: +38012121212
+    example: '0123456789'
   contactType:
     description: "Contact's type"
     type: string
@@ -26,9 +26,9 @@ properties:
   email:
     description: "Contact's email"
     type: string
-    example: 'ggg@example.com'
+    example: 'grabic@example.com'
   isFavourite:
-    description: 'Contact is favourite'
+    description: 'Contact is favorite'
     type: boolean
     example: false
   photo:
